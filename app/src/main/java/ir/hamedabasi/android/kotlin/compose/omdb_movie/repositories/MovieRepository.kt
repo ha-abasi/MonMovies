@@ -1,4 +1,4 @@
-package ir.hamedabasi.android.kotlin.compose.omdb_movie.room.repositories
+package ir.hamedabasi.android.kotlin.compose.omdb_movie.repositories
 
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.ApiKey
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.retrofit.RetrofitInstance

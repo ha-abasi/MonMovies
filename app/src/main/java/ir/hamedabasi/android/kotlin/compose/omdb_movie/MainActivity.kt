@@ -4,44 +4,30 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
+import ir.hamedabasi.android.kotlin.compose.omdb_movie.ViewModel.MovieViewModel
+import ir.hamedabasi.android.kotlin.compose.omdb_movie.ViewModel.MovieViewModelFactory
+import ir.hamedabasi.android.kotlin.compose.omdb_movie.repositories.MovieRepository
+import ir.hamedabasi.android.kotlin.compose.omdb_movie.screens.MovieScreen
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.ui.theme.OmdbMovieTheme
 
+
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //
+        // Our model have parameter, so we need to use factory :
+        //
+        val vmF = MovieViewModelFactory()
+        val vm = ViewModelProvider(this, vmF)[MovieViewModel::class.java]
+
         enableEdgeToEdge()
         setContent {
             OmdbMovieTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                MovieScreen(vm)
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    OmdbMovieTheme {
-        Greeting("Android")
     }
 }

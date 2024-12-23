@@ -9,7 +9,7 @@ plugins {
 
 android {
     namespace = "ir.hamedabasi.android.kotlin.compose.omdb_movie"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "ir.hamedabasi.android.kotlin.compose.omdb_movie"

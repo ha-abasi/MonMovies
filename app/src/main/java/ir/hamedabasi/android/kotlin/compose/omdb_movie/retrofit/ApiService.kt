@@ -7,7 +7,7 @@ import retrofit2.http.Query
 interface ApiService {
 
 
-    // https://www.omdbapi.com/?apikey=<YourApiKey>&type=movie&s=1900&page=1
+
     @GET("/")
     suspend fun findMovies(
         @Query("apikey") apikey: String,
