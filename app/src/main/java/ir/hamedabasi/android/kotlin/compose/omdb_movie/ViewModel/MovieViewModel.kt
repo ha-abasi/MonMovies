@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.retrofit.responses.SearchResultResponse
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.repositories.MovieRepository
+import ir.hamedabasi.android.kotlin.compose.omdb_movie.retrofit.responses.MovieResponse
 import kotlinx.coroutines.launch
 
 //
@@ -16,17 +17,34 @@ import kotlinx.coroutines.launch
 //
 class MovieViewModel(private val repository: MovieRepository) : ViewModel() {
 
-    var movieResponse by mutableStateOf<SearchResultResponse?>(null)
+    var connectionType by mutableStateOf<String?>("Online")
+        private set
+
+    var movieResponse by mutableStateOf<List<MovieResponse>?>(null)
         private set
     var movieResponseFromApi by mutableStateOf<SearchResultResponse?>(null)
         private set
 
 
+    // Online / Offline
+    fun setConnType(type: String){
+        connectionType = type
+    }
 
-    private fun refresh(){
-        viewModelScope.launch {
-            movieResponse = repository.searchMovie("1900")
-        }
+    fun refresh(){
+
+        if (connectionType == "Online")
+            viewModelScope.launch {
+                movieResponse = repository.searchMovie("1900")?.Search
+                if (movieResponse != null)
+                    repository.insertAll(movieResponse!!)
+
+            }
+        else
+            viewModelScope.launch {
+                movieResponse = repository.getAll()
+
+            }
     }
 
     init {

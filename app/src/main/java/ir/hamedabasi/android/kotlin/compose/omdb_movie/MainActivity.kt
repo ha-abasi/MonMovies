@@ -7,7 +7,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.lifecycle.ViewModelProvider
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.ViewModel.MovieViewModel
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.ViewModel.MovieViewModelFactory
-import ir.hamedabasi.android.kotlin.compose.omdb_movie.repositories.MovieRepository
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.screens.MovieScreen
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.ui.theme.OmdbMovieTheme
 
@@ -20,7 +19,7 @@ class MainActivity : ComponentActivity() {
         //
         // Our model have parameter, so we need to use factory :
         //
-        val vmF = MovieViewModelFactory()
+        val vmF = MovieViewModelFactory(applicationContext)
         val vm = ViewModelProvider(this, vmF)[MovieViewModel::class.java]
 
         enableEdgeToEdge()
