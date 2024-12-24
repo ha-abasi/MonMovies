@@ -1,0 +1,2 @@
+- Replace your API key on ApiKey.kt then run it
+- The application search for movie's name like "1900" which is hard coded.
