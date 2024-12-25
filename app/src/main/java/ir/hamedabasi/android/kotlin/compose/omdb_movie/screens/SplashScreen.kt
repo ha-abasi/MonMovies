@@ -1,12 +1,14 @@
 package ir.hamedabasi.android.kotlin.compose.omdb_movie.screens
 
 import android.content.res.Configuration
+import androidx.compose.animation.Animatable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -17,14 +19,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.R
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.ui.theme.Purple40
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.ui.theme.Purple80
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.tween
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.draw.rotate
 
 @Composable
 fun SplashScreen(){
-    Splash()
+
+
+    val rotationDegree = remember { Animatable(0f) }
+    LaunchedEffect(key1 = true) {
+        rotationDegree.animateTo(
+            360f,
+            animationSpec = tween(1000, 300)
+        )
+    }
+
+    Splash(rotationDegree.value)
 }
 
 @Composable
-private fun Splash(){
+private fun Splash(rotationDegree: Float){
 
     var modifier : Modifier = Modifier
     var colorFilter : ColorFilter? = null // the image taint color will be white in case of dark mode
@@ -38,18 +54,23 @@ private fun Splash(){
 
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center)
     {
-        Image(painterResource(R.drawable.movie), "BMW" , colorFilter = colorFilter)
+        Image(
+            painterResource(R.drawable.movie),
+            contentDescription = "Movie" ,
+            colorFilter = colorFilter,
+            modifier = Modifier.rotate(rotationDegree),
+        )
     }
 }
 
 @Preview
 @Composable
 private fun SplashScreenLightPreview() {
-    SplashScreen()
+    Splash(0f)
 }
 
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 private fun SplashScreenNightPreview() {
-    SplashScreen()
+    Splash(0f)
 }
