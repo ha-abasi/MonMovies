@@ -35,6 +35,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import ir.hamedabasi.android.kotlin.compose.omdb_movie.invert
 
 @Composable
 fun WelcomeScreen(){
@@ -70,14 +71,7 @@ fun WelcomeScreen(){
 
     }
 }
-fun Color.invert(): Color {
-    return Color(
-        red = 1f - red,
-        green = 1f - green,
-        blue = 1f - blue,
-        alpha = alpha
-    )
-}
+
 @Composable
 private fun PagerScreen(screen: WelcomeScreenModel, bgColor: Color) {
     val invertedColor = bgColor.invert() // text should be inverted of bgcolor
