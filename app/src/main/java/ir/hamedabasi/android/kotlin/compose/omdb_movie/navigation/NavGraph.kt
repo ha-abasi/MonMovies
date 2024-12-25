@@ -9,13 +9,17 @@ import androidx.navigation.navArgument
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.ViewModel.MovieViewModel
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.screens.MovieScreen
 import ir.hamedabasi.android.kotlin.compose.omdb_movie.screens.SplashScreen
+import ir.hamedabasi.android.kotlin.compose.omdb_movie.screens.welcome.WelcomeScreen
 
 
 @Composable
 fun SetUpNavGraph(movieViewModel: MovieViewModel, navController: NavHostController){
-    NavHost(navController=navController, startDestination=Screen.Splash.route){
+    NavHost(navController=navController, startDestination=Screen.Welcome.route){
         composable(Screen.Splash.route){
             SplashScreen()
+        }
+        composable(Screen.Welcome.route){
+            WelcomeScreen()
         }
         composable(Screen.MovieList.route){
             MovieScreen(movieViewModel)
