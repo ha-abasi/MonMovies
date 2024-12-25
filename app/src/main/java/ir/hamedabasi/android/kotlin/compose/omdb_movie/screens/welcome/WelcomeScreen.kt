@@ -1,21 +1,31 @@
 package ir.hamedabasi.android.kotlin.compose.omdb_movie.screens.welcome
 
 import android.content.res.Configuration
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
@@ -38,9 +48,26 @@ fun WelcomeScreen(){
     Column(
         modifier = Modifier.fillMaxSize().background(bgColor)
     ){
-        HorizontalPager(state = pagerState) {
+        HorizontalPager(state = pagerState, modifier = Modifier.fillMaxHeight(0.8f)) {
             PagerScreen(pages[it], bgColor)
         }
+        Row(modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp)
+            .height(20.dp), horizontalArrangement = Arrangement.Center)
+        {
+            repeat(pages.size){
+                val currentColor = if (pagerState.currentPage == it) bgColor else bgColor.invert()
+                Box(modifier = Modifier
+                    .padding(2.dp)
+                    .clip(CircleShape)
+                    .background(currentColor)
+                    .border(BorderStroke(1.dp, bgColor.invert()), shape = CircleShape)
+                    .size(16.dp))
+            }
+
+        }
+
     }
 }
 fun Color.invert(): Color {
