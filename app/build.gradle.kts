@@ -72,4 +72,7 @@ dependencies {
     // coil [image loading library]:
     implementation("io.coil-kt.coil3:coil-compose:3.0.4")
     implementation("io.coil-kt.coil3:coil-network-okhttp:3.0.4")
+
+    // navigation
+    implementation("androidx.navigation:navigation-compose:2.8.5")
 }
