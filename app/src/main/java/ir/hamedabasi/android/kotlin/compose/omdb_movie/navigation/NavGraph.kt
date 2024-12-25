@@ -19,7 +19,7 @@ fun SetUpNavGraph(movieViewModel: MovieViewModel, navController: NavHostControll
             SplashScreen()
         }
         composable(Screen.Welcome.route){
-            WelcomeScreen()
+            WelcomeScreen(navController)
         }
         composable(Screen.MovieList.route){
             MovieScreen(movieViewModel)
